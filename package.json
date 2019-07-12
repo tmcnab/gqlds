@@ -1,0 +1,37 @@
+{
+     "author": "Tristan McNab <tristan.j.mcnab@gmail.com>",
+     "dependencies": {
+          "express": "^4.17.1",
+          "express-graphql": "^0.8.0",
+          "graphql": "^14.4.2",
+          "levelup": "^4.1.0",
+          "memdown": "^4.1.0",
+          "rocksdb": "^4.0.0"
+     },
+     "description": "GraphQL Data Store",
+     "devDependencies": {
+          "eslint": "^6.0.1",
+          "nodemon": "^1.19.1"
+     },
+     "directories": {
+          "doc": "doc",
+          "lib": "lib",
+          "man": "man",
+          "test": "test"
+     },
+     "homepage": "https://tmcnab.github.io/gqlds",
+     "license": "AGPL-3.0",
+     "main": "lib/index.js",
+     "name": "gqlds",
+     "repository": {
+          "type": "git",
+          "url": "git+https://github.com/tmcnab/gqlds.git"
+     },
+     "scripts": {
+          "start": "node --experimental-modules bin/gqlds",
+          "test": "mocha",
+		  "watch": "nodemon --experimental-modules bin/gqlds" 
+     },
+     "type": "module",
+     "version": "0.0.1"
+}

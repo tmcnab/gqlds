@@ -1,0 +1,27 @@
+#!/usr/bin/env node --experimental-modules
+import gqlds from '../lib/index.js'
+import http from 'http'
+
+const port = 42069
+
+gqlds.set(`port`, port)
+http.createServer(gqlds).on('error', (error) =>
+{
+	if (error.syscall !== 'listen') {
+		throw error;
+	}
+
+	switch (error.code) {
+		case 'EACCES': {
+			console.error(`pipe/port requires elevated privileges`);
+			process.exit(1);
+		} break;
+		case 'EADDRINUSE': {
+			console.error(`pipe/port already in use`);
+			process.exit(1);
+		} break;
+		default: {
+			throw error;
+		}
+	}
+}).listen(port)
