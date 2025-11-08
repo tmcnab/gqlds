@@ -1,5 +1,5 @@
-import { buildSchema } from 'graphql'
 import { compress } from 'hono/compress'
+import { createSchema } from './schema.js'
 import { Hono } from 'hono'
 import { logger } from 'hono/logger'
 import { secureHeaders } from 'hono/secure-headers'
@@ -10,16 +10,6 @@ const app = new Hono()
 app.use(logger())
 app.use(compress())
 app.use(secureHeaders())
-
-const schema = buildSchema(`
-	type Mutation {
-		createType (name: String): Boolean
-	}
-
-	type Query {
-		hello: String
-	}
-`)
 
 const rootResolver: RootResolver = (c) => {
 	return {
@@ -34,7 +24,7 @@ const rootResolver: RootResolver = (c) => {
 app.use('/', graphqlServer({
 	graphiql: true,
 	rootResolver,
-	schema,
+	schema: createSchema(),
 }))
 
 serve({
