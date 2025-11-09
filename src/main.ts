@@ -1,6 +1,6 @@
 import { compress } from 'hono/compress'
 import { createRootResolver } from './createRootResolver.js'
-import { createSchema } from './schema.js'
+import { createSchema } from './createSchema'
 import { graphqlServer } from '@hono/graphql-server'
 import { Hono } from 'hono'
 import { introspectDatabase } from "./introspectDatabase.js"
