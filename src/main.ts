@@ -8,9 +8,6 @@ import { serve } from '@hono/node-server'
 import { type RootResolver, graphqlServer } from '@hono/graphql-server'
 
 console.clear()
-introspectDatabase('Chinook.sqlite').forEach((item) => {
-    console.log(JSON.stringify(item, null, 2))
-})
 
 const app = new Hono()
 app.use(logger())
@@ -27,10 +24,11 @@ const rootResolver: RootResolver = (c) => {
     }
 }
 
+const tableInfo = introspectDatabase('Chinook.sqlite')
 app.use('/', graphqlServer({
     graphiql: true,
     rootResolver,
-    schema: createSchema(),
+    schema: createSchema(tableInfo),
 }))
 
 serve({
