@@ -1,5 +1,5 @@
 import Database from "better-sqlite3"
-import type { TableInfo } from "./types/TableInfo.js"
+import type { TableInfo } from "./types/TableInfo"
 
 export const introspectDatabase = (dbPath: string): TableInfo[] => {
     const db = new Database(dbPath, { readonly: true })
