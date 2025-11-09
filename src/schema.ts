@@ -1,5 +1,6 @@
 import { GraphQLObjectType, GraphQLSchema, GraphQLString } from 'graphql'
-import type { TableInfo } from './types/TableInfo.js'
+import type { TableInfo } from './types/TableInfo'
+import { infoToTypes } from './infoToTypes'
 
 const QueryType = new GraphQLObjectType({
     name: 'Query',
@@ -14,7 +15,9 @@ const QueryType = new GraphQLObjectType({
 })
 
 export const createSchema = (items: TableInfo[]) => {
+    items.map(infoToTypes)
     return new GraphQLSchema({
         query: QueryType,
+        types: items.map(infoToTypes),
     })
 }
