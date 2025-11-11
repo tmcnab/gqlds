@@ -1,6 +1,6 @@
 import { createQueryType } from './createQueryType'
 import { GraphQLSchema } from 'graphql'
-import { SortDirection } from '../types/SortDirection'
+import { SortDirection } from '../types/Sort'
 import { TableInfo } from '../types/TableInfo'
 
 export const createSchema = (items: TableInfo[]) => {

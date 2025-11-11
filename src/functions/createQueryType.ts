@@ -1,7 +1,13 @@
 import { createTypes } from './createTypes'
-import { GraphQLFieldConfig, GraphQLFieldConfigArgumentMap, GraphQLInt, GraphQLList, GraphQLObjectType, GraphQLString } from 'graphql'
+import {
+	GraphQLFieldConfig,
+	GraphQLFieldConfigArgumentMap,
+	GraphQLInt,
+	GraphQLList,
+	GraphQLObjectType,
+} from 'graphql'
 import { TableInfo } from "../types/TableInfo"
-import Database from 'better-sqlite3';
+import Database from 'better-sqlite3'
 
 // https://hasura.io/docs/2.0/api-reference/graphql-api/query/
 
