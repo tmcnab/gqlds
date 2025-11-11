@@ -3,6 +3,9 @@ import { GraphQLFieldConfig, GraphQLFieldConfigArgumentMap, GraphQLList, GraphQL
 import { TableInfo } from "./types/TableInfo"
 import { createTypes } from './createTypes'
 
+// https://hasura.io/docs/2.0/api-reference/graphql-api/query/
+// https://hasura.io/docs/2.0/api-reference/graphql-api/mutation/
+
 export const createQueryType = (items: TableInfo[]): GraphQLObjectType => {
     const types = createTypes(items)
     const queryType: GraphQLObjectType = new GraphQLObjectType({
