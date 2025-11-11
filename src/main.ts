@@ -1,9 +1,9 @@
 import { compress } from 'hono/compress'
-import { createRootResolver } from './createRootResolver'
-import { createSchema } from './createSchema'
+import { createRootResolver } from './functions/createRootResolver'
+import { createSchema } from './functions/createSchema'
 import { graphqlServer } from '@hono/graphql-server'
 import { Hono } from 'hono'
-import { introspectDatabase } from "./introspectDatabase"
+import { introspectDatabase } from "./functions/introspectDatabase"
 import { logger } from 'hono/logger'
 import { secureHeaders } from 'hono/secure-headers'
 import { serve } from '@hono/node-server'
