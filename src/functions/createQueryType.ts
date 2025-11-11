@@ -6,11 +6,11 @@ import {
 	GraphQLList,
 	GraphQLObjectType,
 } from 'graphql'
+import { SortCriteriaList } from '../types/Sort'
 import { TableInfo } from "../types/TableInfo"
 import Database from 'better-sqlite3'
 
 // https://hasura.io/docs/2.0/api-reference/graphql-api/query/
-
 export const createQueryType = (items: TableInfo[]): GraphQLObjectType => {
 	const types = createTypes(items)
 	const queryType: GraphQLObjectType = new GraphQLObjectType({
@@ -18,21 +18,26 @@ export const createQueryType = (items: TableInfo[]): GraphQLObjectType => {
 			const args: GraphQLFieldConfigArgumentMap = {
 				take: { type: GraphQLInt },
 				skip: { type: GraphQLInt },
+				sort: { type: SortCriteriaList },
 			}
 
 			const config: GraphQLFieldConfig<any, any, any> = {
 				args,
 				resolve: (source, args, context, info) => {
-					console.log(args)
 					let sql = `SELECT * FROM ${table.name}`
+
+					if (args['sort']) {
+						const criteria = args['sort'].map(item => `${item.name} ${item.direction}`).join(', ')
+						sql = `${sql} ORDER BY ${criteria}`
+					}
+
 					if (args['take']) {
 						sql = `${sql} LIMIT ${args['take']}`
 					}
+
 					if (args['skip']) {
 						sql = `${sql} OFFSET ${args['skip']}`
 					}
-
-					console.log(sql)
 
 					return new Database('Chinook.sqlite').prepare(sql).all()
 				},
