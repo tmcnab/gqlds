@@ -1,12 +1,12 @@
 import { GraphQLObjectType } from 'graphql'
-import { sqliteTypeToGQLType } from './sqliteTypeToGQLType'
+import { mapSqliteTypeToGQLType } from './mapSqliteTypeToGQLType'
 import { TableInfo } from '../types/TableInfo'
 
 export const createTypes = (items: TableInfo[]): GraphQLObjectType[] => {
     return items.map(item => {
         const fields = item.columns.reduce((value, column) => {
             value[column.name] = {
-                type: sqliteTypeToGQLType(column.type)
+                type: mapSqliteTypeToGQLType(column.type)
             }
             return value
         }, {})
