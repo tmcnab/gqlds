@@ -29,7 +29,10 @@ export const createQueryType = (items: TableInfo[]): GraphQLObjectType => {
 					let sql = `SELECT * FROM ${table.name}`
 
 					if (args['filter']) {
-						console.log(args['filter'])
+						const clause = args['filter'].map(
+							part => `${part.field} ${part.operator} ${part.value}`
+						).join(' AND ')
+						sql = `${sql} WHERE ${clause}`
 					}
 
 					if (args['sort']) {

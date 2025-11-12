@@ -12,11 +12,11 @@ export const Comparator = new GraphQLEnumType({
 	values: {
 		EQ: { value: '=' },
 		GT: { value: '>' },
-		GTE: { value: '≥' },
-		ISN: { value: 'isnull' },
+		GTE: { value: '>=' },
+		// ISN: { value: 'isnull' },
 		LT: { value: '<' },
-		LTE: { value: '≤' },
-		NEQ: { value: '≠' },
+		LTE: { value: '<=' },
+		NEQ: { value: '<>' },
 	}
 })
 
