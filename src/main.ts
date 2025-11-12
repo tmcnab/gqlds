@@ -1,5 +1,4 @@
 import { compress } from 'hono/compress'
-import { createRootResolver } from './functions/createRootResolver'
 import { createSchema } from './functions/createSchema'
 import { graphqlServer } from '@hono/graphql-server'
 import { Hono } from 'hono'
@@ -19,7 +18,6 @@ app.use(secureHeaders())
 const tableInfo = introspectDatabase('Chinook.sqlite')
 app.use('/', graphqlServer({
     graphiql: true,
-    rootResolver: createRootResolver(tableInfo),
     schema: createSchema(tableInfo),
 }))
 
