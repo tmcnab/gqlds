@@ -6,6 +6,7 @@ import {
 	GraphQLList,
 	GraphQLObjectType,
 } from 'graphql'
+import { FilterCriteriaList } from '../types/Filter'
 import { SortCriteriaList } from '../types/Sort'
 import { TableInfo } from "../types/TableInfo"
 import Database from 'better-sqlite3'
@@ -16,15 +17,20 @@ export const createQueryType = (items: TableInfo[]): GraphQLObjectType => {
 	const queryType: GraphQLObjectType = new GraphQLObjectType({
 		fields: items.reduce((value, table) => {
 			const args: GraphQLFieldConfigArgumentMap = {
-				take: { type: GraphQLInt },
+				filter: { type: FilterCriteriaList },
 				skip: { type: GraphQLInt },
 				sort: { type: SortCriteriaList },
+				take: { type: GraphQLInt },
 			}
 
 			const config: GraphQLFieldConfig<any, any, any> = {
 				args,
 				resolve: (source, args, context, info) => {
 					let sql = `SELECT * FROM ${table.name}`
+
+					if (args['filter']) {
+						console.log(args['filter'])
+					}
 
 					if (args['sort']) {
 						const criteria = args['sort'].map(item => `${item.name} ${item.direction}`).join(', ')
