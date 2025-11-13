@@ -6,7 +6,7 @@ import {
     GraphQLString,
 } from 'graphql'
 
-export const mapSqliteTypeToGQLType = (value: string): GraphQLScalarType => {
+export const sqlTypeToGqlType = (value: string): GraphQLScalarType => {
     if (/(BOOL|BOOLEAN)/.test(value)) return GraphQLBoolean;
     if (/(INT|INTEGER)/.test(value)) return GraphQLInt;
     if (/(REAL|FLOAT)/.test(value)) return GraphQLFloat;
