@@ -6,6 +6,7 @@ import { introspectDatabase } from "./functions/introspectDatabase"
 import { logger } from 'hono/logger'
 import { secureHeaders } from 'hono/secure-headers'
 import { serve } from '@hono/node-server'
+import { TypeCache } from './types/TypeCache'
 
 console.clear()
 
@@ -14,6 +15,7 @@ app.use(logger())
 app.use(compress())
 app.use(secureHeaders())
 
+global.typeCache = new TypeCache({ dbName: 'Chinook.sqlite' })
 
 const tableInfo = introspectDatabase('Chinook.sqlite')
 app.use('/', graphqlServer({
