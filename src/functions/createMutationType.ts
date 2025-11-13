@@ -1,7 +1,7 @@
 import { GraphQLObjectType } from 'graphql'
-import { TableInfo } from '../types/TableInfo'
+import { SqliteTable } from '../types/SqliteTable'
 
-export const createMutation = (tableInfo: TableInfo[]): GraphQLObjectType => {
+export const createMutation = (tables: SqliteTable[]): GraphQLObjectType => {
     return new GraphQLObjectType({
         fields: {
             // TODO create a union type of tableInfo types for insert

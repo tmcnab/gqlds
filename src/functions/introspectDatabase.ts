@@ -1,7 +1,7 @@
 import Database from "better-sqlite3"
-import { TableInfo } from "../types/TableInfo"
+import { SqliteTable } from '../types/SqliteTable'
 
-export const introspectDatabase = (dbPath: string): TableInfo[] => {
+export const introspectDatabase = (dbPath: string): SqliteTable[] => {
     const db = new Database(dbPath, { readonly: true })
 
     const tables = db.prepare(`
@@ -10,7 +10,7 @@ export const introspectDatabase = (dbPath: string): TableInfo[] => {
 		ORDER BY name
 	`).all() as { name: string }[]
 
-    const result: TableInfo[] = tables.map((table) => {
+    const result: SqliteTable[] = tables.map((table) => {
         const tableName = table.name
         const columns = db.prepare(`PRAGMA table_info(${tableName})`).all()
         const foreignKeys = db.prepare(`PRAGMA foreign_key_list(${tableName})`).all()
@@ -28,7 +28,7 @@ export const introspectDatabase = (dbPath: string): TableInfo[] => {
                 to: fk.to,
             })),
             name: tableName,
-        } as TableInfo
+        } as SqliteTable
     })
 
     db.close()

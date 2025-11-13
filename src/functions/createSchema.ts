@@ -1,11 +1,11 @@
 import { createQueryType } from './createQueryType'
 import { GraphQLSchema } from 'graphql'
 import { SortDirection } from '../types/Sort'
-import { TableInfo } from '../types/TableInfo'
+import { SqliteTable } from '../types/SqliteTable'
 
-export const createSchema = (items: TableInfo[]) => {
+export const createSchema = (tables: SqliteTable[]) => {
     return new GraphQLSchema({
-        query: createQueryType(items),
+        query: createQueryType(tables),
         types: [
             SortDirection,
         ]

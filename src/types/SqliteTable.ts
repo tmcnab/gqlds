@@ -1,4 +1,4 @@
-export type TableInfo = {
+export type SqliteTable = {
     columns: {
         name: string
         notNull: boolean
