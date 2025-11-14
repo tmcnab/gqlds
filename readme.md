@@ -1,3 +1,9 @@
+## To Do
+
+- foreign key relations
+- create / update / delete records
+- create / update / delete types
+
 ## Resources
 
 - [Constructing Types (graphql-js.org)](https://www.graphql-js.org/docs/constructing-types/)
