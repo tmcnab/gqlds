@@ -19,11 +19,11 @@ global.typeCache = new TypeCache({ dbName: 'Chinook.sqlite' })
 
 const tableInfo = introspectDatabase('Chinook.sqlite')
 app.use('/', graphqlServer({
-	graphiql: true,
-	schema: createSchema(tableInfo),
+    graphiql: true,
+    schema: createSchema(tableInfo),
 }))
 
 serve({
-	fetch: app.fetch,
-	port: 3000,
+    fetch: app.fetch,
+    port: 3000,
 })
