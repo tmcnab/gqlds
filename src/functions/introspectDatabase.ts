@@ -18,14 +18,14 @@ export const introspectDatabase = (dbPath: string): SqliteTable[] => {
 		return {
 			columns: columns.map((col: any) => ({
 				name: col.name,
-				notNull: Boolean(col.notNull),
-				primaryKey: Boolean(col.dflt_value),
+				nullable: !Boolean(col.notNull),
+				primaryKey: Boolean(col.pk),
 				type: col.type,
 			})),
 			foreignKeys: foreignKeys.map((fk: any) => ({
-				from: fk.from,
-				table: fk.table,
-				to: fk.to,
+				domesticColumn: fk.from,
+				foreignColumn: fk.to,
+				foreignTable: fk.table,
 			})),
 			name: tableName,
 		} as SqliteTable

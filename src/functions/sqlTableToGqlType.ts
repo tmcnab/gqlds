@@ -3,10 +3,10 @@ import {
 	GraphQLObjectType,
 	ThunkObjMap,
 } from 'graphql'
-import { SqliteTable } from '../types/SqliteTable'
+import { TableInfo } from '../types/TableInfo'
 import { sqlTypeToGqlType } from './sqlTypeToGqlType'
 
-export const sqlTableToGqlType = (table: SqliteTable) => {
+export const sqlTableToGqlType = (table: TableInfo) => {
 	const fields: ThunkObjMap<GraphQLFieldConfig<any, any, any>> = Object.create(null)
 
 	table.columns.forEach(column => {
