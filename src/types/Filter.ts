@@ -1,4 +1,4 @@
-import { GraphQLBoolean, GraphQLFloat, GraphQLInt, GraphQLUnionType, GraphQLScalarType, Kind } from 'graphql'
+import { GraphQLScalarType, Kind } from 'graphql'
 import {
     GraphQLEnumType,
     GraphQLInputObjectType,

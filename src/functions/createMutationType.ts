@@ -1,5 +1,4 @@
 import { GraphQLObjectType } from 'graphql'
-import { SqliteTable } from '../types/SqliteTable'
 import {
     typeAddFields,
     typeCreate,
@@ -7,7 +6,7 @@ import {
     typeRemoveFields,
 } from './typeMutations'
 
-export const createMutation = (tables: SqliteTable[]): GraphQLObjectType => {
+export const createMutation = (): GraphQLObjectType => {
     return new GraphQLObjectType({
         name: 'Mutation',
         fields: {

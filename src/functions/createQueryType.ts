@@ -24,7 +24,7 @@ export const createQueryType = (tables: SqliteTable[]): GraphQLObjectType => {
 
             const config: GraphQLFieldConfig<any, any, any> = {
                 args,
-                resolve: (source, args, context, info) => {
+                resolve: (source, args) => {
                     let sql = `SELECT * FROM ${table.name}`
 
                     if (args['filter']) {
