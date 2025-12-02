@@ -1,4 +1,4 @@
-export type SqliteTable = {
+export interface SqliteTable {
     columns: {
         name: string
         notNull: boolean
