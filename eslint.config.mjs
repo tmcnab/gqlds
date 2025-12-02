@@ -8,7 +8,9 @@ export default defineConfig(
     tseslint.configs.stylistic,
     {
         rules: {
-            "@typescript-eslint/no-explicit-any": "warn",
+            '@typescript-eslint/no-explicit-any': 'warn',
+            'quotes': ['error', 'single'],
+            'indent': ['error', 'tab'],
         },
     }
 )

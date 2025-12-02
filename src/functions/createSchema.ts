@@ -5,11 +5,11 @@ import { SqliteTable } from '../types/SqliteTable'
 import { createMutation } from './createMutationType'
 
 export const createSchema = (tables: SqliteTable[]) => {
-    return new GraphQLSchema({
-        query: createQueryType(tables),
-        mutation: createMutation(),
-        types: [
-            SortDirection,
-        ]
-    })
+	return new GraphQLSchema({
+		query: createQueryType(tables),
+		mutation: createMutation(),
+		types: [
+			SortDirection,
+		]
+	})
 }
