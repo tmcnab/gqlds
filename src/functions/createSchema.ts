@@ -6,10 +6,8 @@ import { TableInfo } from '../types/TableInfo'
 
 export const createSchema = (tables: TableInfo[]) => {
 	return new GraphQLSchema({
-		query: createQueryType(tables),
 		mutation: createMutation(),
-		types: [
-			SortDirection,
-		]
+		query: createQueryType(tables),
+		types: [SortDirection],
 	})
 }
