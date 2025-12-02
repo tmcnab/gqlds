@@ -10,18 +10,20 @@
         "@eslint/js": "^9.39.1",
         "@types/better-sqlite3": "^7.6.13",
         "@types/graphql": "^14.2.3",
-        "@types/node": "^20.11.17",
+        "@types/node": "^20.19.25",
         "eslint": "^9.39.1",
+        "knip": "^5.71.0",
         "tsx": "^4.7.1",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.48.0"
     },
-    "name": "gqlds",
+    "name": "sql-gql",
     "scripts": {
         "build": "tsc",
         "dev": "tsx watch src/main.ts",
-        "start": "node dist/main.js",
-        "lint": "eslint src/**/*.ts"
+        "knip": "knip",
+        "lint": "eslint src/**/*.ts",
+        "start": "node dist/main.js"
     },
     "type": "module"
 }
