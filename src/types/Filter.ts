@@ -7,7 +7,7 @@ import {
 	GraphQLString,
 } from 'graphql'
 
-export const Comparator = new GraphQLEnumType({
+const Comparator = new GraphQLEnumType({
 	name: 'Comparator',
 	values: {
 		EQ: { value: '=' },
@@ -19,7 +19,7 @@ export const Comparator = new GraphQLEnumType({
 	}
 })
 
-export const FilterValue = new GraphQLScalarType({
+const FilterValue = new GraphQLScalarType({
 	name: 'FilterValue',
 	description: 'A scalar type that can represent String, Int, Float, Boolean or null values',
 	serialize(value) {
@@ -30,24 +30,24 @@ export const FilterValue = new GraphQLScalarType({
 	},
 	parseLiteral(ast) {
 		switch (ast.kind) {
-		case Kind.STRING:
-			return ast.value
-		case Kind.INT:
-			return parseInt(ast.value, 10)
-		case Kind.FLOAT:
-			return parseFloat(ast.value)
-		case Kind.BOOLEAN:
-			return ast.value
-		case Kind.NULL:
-			return null
-		default:
-			throw new Error(`Unsupported kind: ${ast.kind}`)
+			case Kind.STRING:
+				return ast.value
+			case Kind.INT:
+				return parseInt(ast.value, 10)
+			case Kind.FLOAT:
+				return parseFloat(ast.value)
+			case Kind.BOOLEAN:
+				return ast.value
+			case Kind.NULL:
+				return null
+			default:
+				throw new Error(`Unsupported kind: ${ast.kind}`)
 		}
 	}
 })
 
 
-export const FilterCriteria = new GraphQLInputObjectType({
+const FilterCriteria = new GraphQLInputObjectType({
 	fields: {
 		field: {
 			type: new GraphQLNonNull(GraphQLString),

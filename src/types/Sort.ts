@@ -6,7 +6,7 @@ import {
 	GraphQLEnumType,
 } from 'graphql'
 
-export const SortDirection = new GraphQLEnumType({
+const SortDirection = new GraphQLEnumType({
 	name: 'SortDirection',
 	values: {
 		ASC: { value: 'ASC' },
