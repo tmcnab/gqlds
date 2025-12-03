@@ -1,5 +1,6 @@
 import {
 	GraphQLFieldConfig,
+	GraphQLList,
 	GraphQLObjectType,
 	ThunkObjMap,
 } from 'graphql'
@@ -15,7 +16,22 @@ export const sqlTableToGqlType = (table: TableInfo) => {
 		}
 	})
 
-	// TODO add foreign keys as fields
+	// Fix: Add foreign keys as fields, ensure required 'name' in GraphQLObjectType, and correct the type usage.
+
+	table.foreignKeys.forEach(foreignKey => {
+		fields[foreignKey.foreignTable] = {
+			type: new GraphQLList(
+				new GraphQLObjectType({
+					name: `${table.name}_${foreignKey.foreignTable}_FK`,
+					fields: {
+						[foreignKey.foreignColumn]: {
+							type: sqlTypeToGqlType(foreignKey.foreignColumn)
+						}
+					},
+				})
+			)
+		};
+	});
 
 	return new GraphQLObjectType({
 		fields,

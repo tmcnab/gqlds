@@ -8,8 +8,8 @@ import {
 	GraphQLObjectType,
 } from 'graphql'
 import { SortCriteriaList } from '../types/Sort'
-import Database from 'better-sqlite3'
 import { TableInfo } from '../types/TableInfo'
+import Database from 'better-sqlite3'
 
 export const createQueryType = (tables: TableInfo[]): GraphQLObjectType => {
 	const types = createTypes(tables)
