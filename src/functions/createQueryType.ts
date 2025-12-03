@@ -1,4 +1,4 @@
-import { createTypes } from './createTypes'
+import { createTypes2 } from './createTypes'
 import { FilterCriteriaList } from '../types/Filter'
 import {
 	GraphQLFieldConfig,
@@ -12,9 +12,9 @@ import { TableInfo } from '../types/TableInfo'
 import Database from 'better-sqlite3'
 
 export const createQueryType = (tables: TableInfo[]): GraphQLObjectType => {
-	const types = createTypes(tables)
+	const types = createTypes2(new Set(tables))
 	const queryType: GraphQLObjectType = new GraphQLObjectType({
-		fields: tables.reduce((value, table) => {
+		fields: Array.from(types.values()).reduce((value, table) => {
 			const args: GraphQLFieldConfigArgumentMap = {
 				filter: { type: FilterCriteriaList },
 				skip: { type: GraphQLInt },
@@ -49,7 +49,7 @@ export const createQueryType = (tables: TableInfo[]): GraphQLObjectType => {
 
 					return new Database('Chinook.sqlite').prepare(sql).all()
 				},
-				type: new GraphQLList(types.find(t => t.name == table.name) as GraphQLObjectType),
+				type: new GraphQLList(types.get(table.name) as GraphQLObjectType),
 			}
 			value[table.name] = config
 			return value
