@@ -1,6 +1,6 @@
 import { GraphQLObjectType } from 'graphql'
-import { TableInfo } from '../types/TableInfo'
 import { sqlTypeToGqlType } from './sqlTypeToGqlType'
+import { TableInfo } from '../types/TableInfo'
 
 export function createTypeFromTable(tableInfo: TableInfo): GraphQLObjectType {
 	const fields = tableInfo.columns.reduce((value, column) => {

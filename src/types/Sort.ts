@@ -1,10 +1,10 @@
-import { GraphQLList } from 'graphql'
 import {
+	GraphQLEnumType,
 	GraphQLInputObjectType,
 	GraphQLNonNull,
 	GraphQLString,
-	GraphQLEnumType,
 } from 'graphql'
+import { GraphQLList } from 'graphql'
 
 export const SortDirection = new GraphQLEnumType({
 	name: 'SortDirection',

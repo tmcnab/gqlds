@@ -1,4 +1,4 @@
-import { createTypes2 } from './createTypes'
+import { createTypesFromTables } from './createTypesFromTables'
 import { FilterCriteriaList } from '../types/Filter'
 import {
 	GraphQLFieldConfig,
@@ -12,7 +12,7 @@ import { TableInfo } from '../types/TableInfo'
 import Database from 'better-sqlite3'
 
 export const createQueryType = (tables: TableInfo[]): GraphQLObjectType => {
-	const types = createTypes2(new Set(tables))
+	const types = createTypesFromTables(new Set(tables))
 	const queryType: GraphQLObjectType = new GraphQLObjectType({
 		fields: Array.from(types.values()).reduce((value, table) => {
 			const args: GraphQLFieldConfigArgumentMap = {
@@ -24,7 +24,7 @@ export const createQueryType = (tables: TableInfo[]): GraphQLObjectType => {
 
 			const config: GraphQLFieldConfig<any, any, any> = {
 				args,
-				resolve: (source, args) => {
+				resolve: (_, args) => {
 					let sql = `SELECT * FROM ${table.name}`
 
 					if (args['filter']) {
