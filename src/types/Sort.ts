@@ -14,7 +14,7 @@ export const SortDirection = new GraphQLEnumType({
 	}
 })
 
-export const SortCriteria = new GraphQLInputObjectType({
+const SortCriteria = new GraphQLInputObjectType({
 	fields: {
 		direction: {
 			type: new GraphQLNonNull(SortDirection),
