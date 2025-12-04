@@ -1,7 +1,7 @@
 ## To Do
 
 - foreign key relations
-- create / update / delete records
+- ~~create~~ / update / delete records
 - create / update / delete types
 
 ## Resources

@@ -1,7 +1,8 @@
+import { getDatabase } from './getDatabase'
 import { GraphQLBoolean, GraphQLInputObjectType } from 'graphql'
+import { logError } from './logError'
 import { sqlTypeToGqlType } from './sqlTypeToGqlType'
 import { TableInfo } from '../types/TableInfo'
-import { getDatabase } from './getDatabase'
 
 export const createInsertMutation = (table: TableInfo) => {
 	const inputTypeFields = table.columns.reduce((value, column) => {
@@ -25,13 +26,13 @@ export const createInsertMutation = (table: TableInfo) => {
 			try {
 				const database = getDatabase()
 				const keys = Object.keys(args.data).join(', ')
-				const values = Object.keys(args.data).map(key => '?').join(', ')
+				const values = Object.keys(args.data).map(_key => '?').join(', ')
 				const insert = database.prepare(`INSERT INTO ${table.name} (${keys}) VALUES (${values})`)
 				const result = insert.run(...Object.values(args.data))
 				return result.changes > 0
 			} catch (error) {
-				console.error(error)
-				throw error
+				logError(error)
+				return false
 			}
 		},
 		type: GraphQLBoolean
