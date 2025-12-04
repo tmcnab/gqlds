@@ -26,7 +26,7 @@ export const createInsertMutation = (table: TableInfo) => {
 			try {
 				const database = getDatabase()
 				const keys = Object.keys(args.data).join(', ')
-				const values = Object.keys(args.data).map(_key => '?').join(', ')
+				const values = Object.keys(args.data).map(() => '?').join(', ')
 				const insert = database.prepare(`INSERT INTO ${table.name} (${keys}) VALUES (${values})`)
 				const result = insert.run(...Object.values(args.data))
 				return result.changes > 0

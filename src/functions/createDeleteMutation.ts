@@ -20,10 +20,10 @@ export const createDeleteMutation = (table: TableInfo) => {
 				}
 
 				const whereClause = args.filter
-					.map(part => `${part.field} ${part.operator} ?`)
+					.map((part) => `${part.field} ${part.operator} ?`)
 					.join(' AND ')
 
-				const values = args.filter.map(part => part.value)
+				const values = args.filter.map((part) => part.value)
 				const deleteQuery = database.prepare(`DELETE FROM ${table.name} WHERE ${whereClause}`)
 				const result = deleteQuery.run(...values)
 				return result.changes > 0

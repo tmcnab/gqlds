@@ -22,20 +22,20 @@ export const createQueryType = (tables: TableInfo[]): GraphQLObjectType => {
 				take: { type: GraphQLInt },
 			}
 
-			const config: GraphQLFieldConfig<any, any, any> = {
+			const config: GraphQLFieldConfig<never, never, any> = {
 				args,
 				resolve: (_, args) => {
 					let sql = `SELECT * FROM ${table.name}`
 
 					if (args['filter']) {
 						const clause = args['filter'].map(
-							part => `${part.field} ${part.operator} ${part.value}`
+							(part) => `${part.field} ${part.operator} ${part.value}`
 						).join(' AND ')
 						sql = `${sql} WHERE ${clause}`
 					}
 
 					if (args['sort']) {
-						const criteria = args['sort'].map(item => `${item.name} ${item.direction}`).join(', ')
+						const criteria = args['sort'].map((item) => `${item.name} ${item.direction}`).join(', ')
 						sql = `${sql} ORDER BY ${criteria}`
 					}
 

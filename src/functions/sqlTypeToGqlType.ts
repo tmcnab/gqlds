@@ -1,4 +1,4 @@
-import { GraphQLNonNull } from 'graphql';
+import { GraphQLNonNull } from 'graphql'
 import {
 	GraphQLBoolean,
 	GraphQLFloat,

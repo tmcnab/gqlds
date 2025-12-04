@@ -14,7 +14,7 @@ export const typeAddFields = () => {
 		args: {
 			name: { type: GraphQLString },
 		},
-		resolve: (_: any, args: { name: string, fields: string[] }) => {
+		resolve: (_, args: { name: string, fields: string[] }) => {
 			console.info('typeAddFields', JSON.parse(JSON.stringify(args)))
 			// TODO add the fields to the type
 			return false
@@ -31,7 +31,7 @@ export const typeCreate = () => {
 			name: { type: GraphQLString },
 			fields: { type: new GraphQLList(CreateTypeFieldArgument) },
 		},
-		resolve: (_: any, args: { name: string, fields: typeof CreateTypeFieldArgument[] }) => {
+		resolve: (_, args: { name: string, fields: typeof CreateTypeFieldArgument[] }) => {
 			console.info('typeCreate', JSON.parse(JSON.stringify(args)))
 			// TODO create the type in the database
 			return false
@@ -45,7 +45,7 @@ export const typeRemove = () => {
 		args: {
 			name: { type: GraphQLString },
 		},
-		resolve: (_: any, args: { name: string }) => {
+		resolve: (_, args: { name: string }) => {
 			console.info('typeRemove', args)
 			// TODO remove the type from the database
 			return false
@@ -60,7 +60,7 @@ export const typeRemoveFields = () => {
 			name: { type: GraphQLString },
 			fields: { type: new GraphQLList(GraphQLString) },
 		},
-		resolve: (_: any, args: { name: string, fields: string[] }) => {
+		resolve: (_, args: { name: string, fields: string[] }) => {
 			console.info('typeRemoveFields', args)
 			// TODO remove the fields from the type
 			return false
