@@ -27,8 +27,14 @@ export const tableInfo = (db: Database, name: string): TableInfo => {
 			type: col.type,
 		})),
 		foreignKeys: foreignKeys.map((fk) => ({
-			domesticColumn: fk.from,
-			foreignColumn: fk.to,
+			from: {
+				table: name,
+				column: fk.from,
+			},
+			to: {
+				table: fk.table,
+				column: fk.to,
+			},
 			foreignTable: fk.table,
 		})),
 		name,

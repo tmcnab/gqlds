@@ -10,6 +10,12 @@ export const createTypesFromTables = (tableInfo: Set<TableInfo>): Map<string, Gr
 		types.set(table.name, createTypeFromTable(table))
 	})
 
+	tableInfo.forEach(table => {
+		table.foreignKeys.forEach(foreignKey => {
+			// types.set(foreignKey.foreignTable, createTypeFromTable(foreignKey.foreignTable))
+			console.info(`${foreignKey.from.table}.${foreignKey.from.column} → ${foreignKey.to.table}.${foreignKey.to.column}`)
+		})
+	})
 	// Second pass: create types for each foreign key
 
 

@@ -6,9 +6,14 @@ export interface TableInfo {
 		type: string
 	}[]
 	foreignKeys: {
-		domesticColumn: string
-		foreignColumn: string
-		foreignTable: string
+		from: {
+			table: string
+			column: string
+		}
+		to: {
+			table: string
+			column: string
+		}
 	}[]
 	name: string
 }
