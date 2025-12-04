@@ -1,18 +1,14 @@
 import { createTypesFromTables } from './createTypesFromTables'
 import { FilterCriteriaList } from '../types/Filter'
-import {
-	GraphQLFieldConfig,
-	GraphQLFieldConfigArgumentMap,
-	GraphQLInt,
-	GraphQLList,
-	GraphQLObjectType,
-} from 'graphql'
+import { getDatabase } from './getDatabase'
+import { GraphQLFieldConfig, GraphQLFieldConfigArgumentMap, GraphQLInt, GraphQLList, GraphQLObjectType } from 'graphql'
+import { logError } from './logError'
 import { SortCriteriaList } from '../types/Sort'
 import { TableInfo } from '../types/TableInfo'
-import Database from 'better-sqlite3'
 
 export const createQueryType = (tables: TableInfo[]): GraphQLObjectType => {
 	const types = createTypesFromTables(new Set(tables))
+
 	const queryType: GraphQLObjectType = new GraphQLObjectType({
 		fields: Array.from(types.values()).reduce((value, table) => {
 			const args: GraphQLFieldConfigArgumentMap = {
@@ -47,7 +43,14 @@ export const createQueryType = (tables: TableInfo[]): GraphQLObjectType => {
 						sql = `${sql} OFFSET ${args['skip']}`
 					}
 
-					return new Database('Chinook.sqlite').prepare(sql).all()
+					// Execute the SQL query and return the results or null if there is an error
+					try {
+						const database = getDatabase()
+						return database.prepare(sql).all()
+					} catch (error) {
+						logError(error)
+						return null
+					}
 				},
 				type: new GraphQLList(types.get(table.name) as GraphQLObjectType),
 			}
