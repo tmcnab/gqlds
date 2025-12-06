@@ -1,7 +1,9 @@
 BEGIN TRANSACTION;
 CREATE TABLE Passenger STRICT (
-	pax_id INTEGER PRIMARY KEY,
-	first_name TEXT NOT NULL,
-	last_name TEXT NOT NULL,
+	email TEXT UNIQUE,
+	name_family TEXT NOT NULL,
+	name_given TEXT NOT NULL,
+	uid STRING PRIMARY KEY NOT NULL DEFAULT (uuid4()),
+	CONSTRAINT unique_email UNIQUE (email)
 );
 COMMIT;

@@ -11,16 +11,6 @@ CREATE TABLE Aircraft (
 	-- 3000
 ) WITHOUT ROWID;
 ------------------------------------------------------------------------------
--- CREW (STRICT table w/ generated columns)
-------------------------------------------------------------------------------
-CREATE TABLE Crew STRICT (
-	crew_id INTEGER PRIMARY KEY,
-	first_name TEXT NOT NULL,
-	full_name TEXT GENERATED ALWAYS AS (first_name || ' ' || last_name) STORED,
-	hire_date DATE NOT NULL last_name TEXT NOT NULL,
-	role TEXT CHECK(role IN ('Pilot', 'Attendant', 'Staff'))
-);
-------------------------------------------------------------------------------
 -- FLIGHT (main table)
 ------------------------------------------------------------------------------
 CREATE TABLE Flight (
@@ -42,15 +32,6 @@ CREATE TABLE FlightCrew (
 	crew_id INTEGER NOT NULL REFERENCES Crew(crew_id),
 	role TEXT NOT NULL,
 	PRIMARY KEY(flight_id, crew_id)
-);
-------------------------------------------------------------------------------
--- PASSENGERS
-------------------------------------------------------------------------------
-CREATE TABLE Passenger (
-	pax_id INTEGER PRIMARY KEY,
-	first_name TEXT NOT NULL,
-	last_name TEXT NOT NULL,
-	passport TEXT UNIQUE
 );
 ------------------------------------------------------------------------------
 -- TICKETS (STRICT, CHECK, foreign keys)
