@@ -1,8 +1,10 @@
 ## To Do
 
 - foreign key relations
-- ~~create~~ / update / ~~delete~~ records
 - create / update / delete types
+- documentation
+- example
+- tests
 
 ## Resources
 
