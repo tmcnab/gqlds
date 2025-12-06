@@ -15,9 +15,9 @@ export const createMutation = (tables: TableInfo[]): GraphQLObjectType => {
 				value[`update${table.name}`] = createUpdateMutation(table)
 				return value
 			}, Object.create(null)),
-			typeDelete: createTypeDelete(),
-			typeInsert: createTypeInsert(),
-			typeUpdate: createTypeUpdate(),
+			createType: createTypeUpdate(),
+			deleteType: createTypeDelete(),
+			insertType: createTypeInsert(),
 		},
 	})
 }
