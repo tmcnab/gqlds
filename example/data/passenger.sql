@@ -1,0 +1,7 @@
+BEGIN TRANSACTION;
+CREATE TABLE Passenger STRICT (
+	pax_id INTEGER PRIMARY KEY,
+	first_name TEXT NOT NULL,
+	last_name TEXT NOT NULL,
+);
+COMMIT;
